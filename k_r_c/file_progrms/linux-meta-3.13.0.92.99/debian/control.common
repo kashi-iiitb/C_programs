@@ -1,0 +1,392 @@
+Source: linux-meta
+Section: devel
+Priority: optional
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Standards-Version: 3.6.1
+Build-Depends: dpkg (>= 1.13.19), debhelper (>= 5), gawk
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-RELEASE_NAME-meta.git
+
+Package: linux-source
+Architecture: all
+Section: devel
+Priority: optional
+Depends: ${misc:Depends}, linux-source-${kernel-version}
+Description: Linux kernel source with Ubuntu patches
+ This package will always depend on the latest Linux kernel source code
+ available. The Ubuntu patches have been applied.
+
+Package: linux-crashdump
+Architecture: i386 amd64 ppc64el
+Section: devel
+Depends: ${misc:Depends}, kdump-tools, grub-pc (>= 1.96+20090611-1ubuntu2) [i386 amd64] | grub-efi-ia32 [i386 amd64] | grub-efi-amd64 [i386 amd64] | grub (>= 0.97-29ubuntu24) [i386 amd64]
+Recommends: apport
+Suggests: crash
+Description: Linux kernel crashdump setup for the latest generic kernel
+ This package installs all the needed infrastructure to get crashdumps from
+ your running system. If you are experiencing kernel crashes that cannot
+ be debugged normally (because the problem is infrequent or panic's the
+ system in such a way as to make information gathering impossible), then
+ you can install this package to automatically enable capture of the
+ vmcore on crashes.
+
+#
+# Reference the current Hardware Enablement LTS generic and virtual kernel flavours.
+#
+Package: linux-image-hwe-generic-RELEASE_NAME
+Architecture: i386 amd64 armhf arm64 ppc64el
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-generic-lts-HWE_KERNEL_NAME
+Description: Depends on the generic hardware enablement kernel image.
+
+Package: linux-hwe-generic-RELEASE_NAME
+Architecture: i386 amd64 armhf arm64 ppc64el
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-hwe-generic-RELEASE_NAME, linux-headers-generic-lts-HWE_KERNEL_NAME
+Description: Depends on the generic hardware enablement kernel image and headers.
+
+Package: linux-image-hwe-virtual-RELEASE_NAME
+Architecture: i386 amd64 armhf arm64 ppc64el
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-virtual-lts-HWE_KERNEL_NAME [i386 amd64 ppc64el], linux-image-generic-lts-HWE_KERNEL_NAME [armhf arm64]
+Description: Depends on the virtual hardware enablement kernel image.
+
+Package: linux-hwe-virtual-RELEASE_NAME
+Architecture: i386 amd64 armhf arm64 ppc64el
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-hwe-virtual-RELEASE_NAME [i386 amd64 ppc64el], linux-headers-virtual-lts-HWE_KERNEL_NAME [i386 amd64 ppc64el], linux-image-hwe-generic-RELEASE_NAME [armhf arm64], linux-headers-generic-lts-HWE_KERNEL_NAME [armhf arm64]
+Description: Depends on the virtual hardware enablement kernel image and headers.
+
+# Upgrade packages (drop after trusty)
+
+Package: linux-tools-lts-quantal
+Architecture: i386 amd64
+Section: kernel
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Linux kernel versioned Tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lts-quantal
+Architecture: i386 amd64
+Section: devel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lts-quantal
+Architecture: i386 amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-quantal
+Architecture: i386 amd64
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Generic Linux kernel image and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-quantal-eol-upgrade
+Architecture: amd64
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Complete Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-image-generic-lts-quantal
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-image-generic
+Description: Signed Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-quantal
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-quantal-eol-upgrade
+Architecture: amd64
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-lts-raring
+Architecture: i386 amd64 armhf
+Section: kernel
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Linux kernel versioned Tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lts-raring
+Architecture: i386 amd64 armhf
+Section: devel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers-generic
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lts-raring
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-raring
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Generic Linux kernel image and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-raring-eol-upgrade
+Architecture: amd64 armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Complete Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-image-generic-lts-raring
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-image-generic
+Description: Signed Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-raring
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-raring-eol-upgrade
+Architecture: amd64
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-lts-saucy
+Architecture: i386 amd64 armhf
+Section: kernel
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Linux kernel versioned Tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lts-saucy
+Architecture: i386 amd64 armhf
+Section: devel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers-generic
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lts-saucy
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-generic-lts-saucy
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Generic Linux kernel tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-saucy
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Generic Linux kernel image and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-saucy-eol-upgrade
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Complete Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lpae-lts-saucy
+Architecture: armhf
+Section: kernel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers-generic-lpae
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lpae-lts-saucy
+Architecture: armhf
+Section: kernel
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic-lpae
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-generic-lpae-lts-saucy
+Architecture: armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-generic-lpae
+Description: Generic Linux kernel tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lpae-lts-saucy
+Architecture: armhf
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-generic-lpae
+Description: Complete Generic Linux kernel and headers 
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lpae-lts-saucy-eol-upgrade
+Architecture: armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic-lpae
+Description: Complete Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-image-generic-lts-saucy
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-image-generic
+Description: Signed Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-saucy
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-saucy-eol-upgrade
+Architecture: amd64
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-lts-trusty
+Architecture: i386 amd64 armhf
+Section: kernel
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Linux kernel versioned Tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lts-trusty
+Architecture: i386 amd64 armhf
+Section: devel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers-generic
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lts-trusty
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-generic-lts-trusty
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-generic
+Description: Generic Linux kernel tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lts-trusty
+Architecture: i386 amd64 armhf
+Section: metapackages
+Priority: optional
+Depends: ${misc:Depends}, linux-generic
+Description: Generic Linux kernel image and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-headers-generic-lpae-lts-trusty
+Architecture: armhf
+Section: kernel
+Priority: optional 
+Depends: ${misc:Depends}, linux-headers-generic-lpae
+Description: Generic Linux kernel headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-image-generic-lpae-lts-trusty
+Architecture: armhf
+Section: kernel
+Priority: optional 
+Depends: ${misc:Depends}, linux-image-generic-lpae
+Description: Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-tools-generic-lpae-lts-trusty
+Architecture: armhf
+Section: metapackages
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-generic-lpae
+Description: Generic Linux kernel tools
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-generic-lpae-lts-trusty
+Architecture: armhf
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-generic-lpae
+Description: Complete Generic Linux kernel and headers 
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-image-generic-lts-trusty
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-image-generic
+Description: Signed Generic Linux kernel image
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+
+Package: linux-signed-generic-lts-trusty
+Architecture: amd64
+Section: metapackages
+Priority: optional 
+Depends: ${misc:Depends}, linux-signed-generic
+Description: Complete Signed Generic Linux kernel and headers
+ Transistional package for upgrades from 12.04 to 14.04 (Precise to Trusty)
+

@@ -1,0 +1,23 @@
+Package: linux-headers-server
+Architecture: amd64 i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-headers-generic (= ${binary:Version})
+Description: Transitional package.
+ This package will always depend on linux-headers-generic.
+
+Package: linux-image-server
+Architecture: amd64 i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-generic (= ${binary:Version})
+Description: Transitional package.
+ This package will always depend on linux-image-generic.
+
+Package: linux-server
+Architecture: amd64 i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-generic (= ${binary:Version})
+Description: Transitional package.
+ This package will always depend on linux-generic.

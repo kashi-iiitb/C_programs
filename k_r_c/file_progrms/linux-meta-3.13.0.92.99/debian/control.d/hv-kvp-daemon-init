@@ -1,0 +1,8 @@
+Package: hv-kvp-daemon-init
+Architecture: amd64
+Section: oldlibs
+Priority: optional
+Depends: ${misc:Depends}, linux-cloud-tools-virtual | linux-cloud-tools
+Description: Transitional Package for Hyper-V tools
+ This is a transitional package for upgrade paths. You should
+ be using linux-cloud-tools.

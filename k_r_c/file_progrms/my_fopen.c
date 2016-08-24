@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+/*FILE* my_fopen(char *name, char *mode)
+{
+  int fd;
+  FILE *fp;
+  if(*mode!='r'||*mode!='w'||*mode!='a')
+	return NULL;
+  if(*mode=='r')
+  {
+	fd=open(name,O_RDONLY);
+	if(fd==-1)
+		return NULL;
+	else
+	{
+		retun fd;
+	}
+  }
+
+}
+FILE *my_fopen(char *name, char *mode)
+   {
+       int fd;
+       FILE *fp;
+
+       if (*mode != 'r' && *mode != 'w' && *mode != 'a')
+           return NULL;
+       for (fp = _iob; fp < _iob + OPEN_MAX; fp++)
+           if ((fp->flag & (_READ | _WRITE)) == 0)
+               break;        // found free slot 
+       if (fp >= _iob + OPEN_MAX)   // no free slots 
+           return NULL;
+
+       if (*mode == 'w')
+           fd = creat(name, PERMS);
+       else if (*mode == 'a') {
+           if ((fd = open(name, O_WRONLY, 0)) == -1)
+               fd = creat(name, PERMS);
+           lseek(fd, 0L, 2);
+       } else
+           fd = open(name, O_RDONLY, 0);
+       if (fd == -1)         // couldn't access name 
+           return NULL;
+       fp->fd = fd;
+       fp->cnt = 0;
+       fp->base = NULL;
+       fp->flag = (*mode == 'r') ? _READ : _WRITE;
+       return fp;
+   }
+*/
+int main()
+{
+	//FILE *fp;
+	int id;
+	int num=0;
+	char buf[1024];
+	id = open("test.txt",O_RDONLY);
+	if(id!=-1)
+	{
+		
+		while((num = read(id,buf,1023))>0)
+		{
+			printf("%s",buf);
+		}
+		/*else
+		{
+			perror("Error reading file!!");
+		}
+		
+		while(!feof(fp))
+		{
+			printf("%c",fgetc(fp));
+		}*/
+	}
+	else
+	{
+		perror("File Opening Error!!");
+	}
+	close(id);
+}

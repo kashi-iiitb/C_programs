@@ -1,0 +1,37 @@
+Package: linux-headers-powerpc-e500
+Architecture: powerpc
+Section: kernel
+Priority: optional
+Depends: linux-headers-${kernel-abi-version}-powerpc-e500
+Description: Linux kernel headers on Freescale Power e500v1 and e500v2.
+ This package will always depend on the latest kernel headers available
+ for Freescale Power e500v1 and e500v2 support.
+
+Package: linux-image-powerpc-e500
+Architecture: powerpc
+Section: kernel
+Priority: optional
+Depends: linux-image-${kernel-abi-version}-powerpc-e500, linux-firmware
+Description: Linux kernel image on Freescale Power e500v1 and e500v2.
+ This package will always depend on the latest kernel image available
+ for Freescale Power e500v1 and e500v2 support.
+
+Package: linux-tools-powerpc-e500
+Architecture: powerpc
+Section: kernel
+Priority: optional
+Provides: linux-tools
+Depends: ${misc:Depends}, linux-tools-${kernel-abi-version}-powerpc-e500
+Description: Linux kernel tools for Freescale Power e500v1 and e500v2.
+ This package will always depend on the latest e500 kernel tools
+ available.
+
+Package: linux-powerpc-e500
+Architecture: powerpc
+Section: kernel
+Priority: optional
+Depends: linux-image-powerpc-e500, linux-headers-powerpc-e500
+Description: Complete Linux kernel on Freescale Power e500v1 and e500v2.
+ This package will always depend on the latest complete Linux kernel and headers
+ for Freescale Power e500v1 and e500v2 support.
+

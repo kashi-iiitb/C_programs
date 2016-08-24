@@ -1,0 +1,24 @@
+Package: linux-headers-lowlatency-pae
+Architecture: i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-headers-lowlatency
+Description: Transitional package
+ This package will always depend on linux-headers-lowlatency
+
+Package: linux-image-lowlatency-pae
+Architecture: i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-image-lowlatency
+Description: Transitional package
+ This package will always depend on linux-image-lowlatency
+
+Package: linux-lowlatency-pae
+Architecture: i386
+Section: kernel
+Priority: optional
+Depends: ${misc:Depends}, linux-lowlatency
+Description: Transitional package
+ This package will always depend on linux-lowlatency
+
