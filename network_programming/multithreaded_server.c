@@ -17,20 +17,25 @@ void* handle_connection(void* c_fd){
         printf("Error in read()\n");
         //return -1;        
     } else{
-        printf("%s\n", recv_buf);
+        //printf("%s\n", recv_buf);
     }
     
-    FILE *fd = fopen("socket_server.c", "r");
-    if(fd<0){
+    FILE *fp = fopen("big.txt", "r");
+    if(fp<0){
         printf("Error opening file\n");
         //return -1;
     }
-    int num_chars=0;
+    int num_chars=0;   
     memset(send_buf, 0, MAX_BUF_SIZE);
-    num_chars = fread(send_buf, 1, MAX_BUF_SIZE-1, fd);
-
-    printf("contents of the send_buf = %s, num_chars=%d",
-            send_buf, num_chars);
+    while((num_chars = fread(send_buf, 1, MAX_BUF_SIZE-1, fp)) >0) {
+        //printf("Next send:\ncontents of the send_buf = %s, num_chars=%d",
+        //        send_buf, num_chars);
+        //printf("\nnum_chars=%d\n", num_chars);
+        //printf("%s", send_buf);
+        memset(send_buf, 0, MAX_BUF_SIZE);
+    }
+    //printf("\nAt the end num_chars=%d\n", num_chars);
+    fclose(fp);
 }
 
 int main(){
@@ -63,7 +68,7 @@ int main(){
         }
         pthread_t t;
         pthread_create(&t, NULL, handle_connection, &client_fd);
-
+        //pthread_join(t, NULL);
     }
 
     //handle_connection(&client_fd);
