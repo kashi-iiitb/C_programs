@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <netinet/in.h>
 #include <pthread.h>
+#include <semaphore.h>
 
 #define SERVER_PORT 2024
 #define MAX_BUF_SIZE 4096
+sem_t sem_nthreads;
+
 
 void* handle_connection(void* c_fd){
     int client_fd = *((int*)c_fd);
@@ -25,6 +28,7 @@ void* handle_connection(void* c_fd){
         printf("Error opening file\n");
         //return -1;
     }
+    sleep(10);
     int num_chars=0;   
     memset(send_buf, 0, MAX_BUF_SIZE);
     while((num_chars = fread(send_buf, 1, MAX_BUF_SIZE-1, fp)) >0) {
@@ -35,6 +39,8 @@ void* handle_connection(void* c_fd){
         memset(send_buf, 0, MAX_BUF_SIZE);
     }
     //printf("\nAt the end num_chars=%d\n", num_chars);
+    //printf("post: client connection count=%d\n",num_threads);
+    sem_post(&sem_nthreads);
     fclose(fp);
 }
 
@@ -42,7 +48,9 @@ int main(){
     struct sockaddr_in saddr, caddr;
     __socklen_t saddr_len, caddr_len;
     int sock_fd, client_fd;
+    unsigned int num_threads=0;
 
+    sem_init(&sem_nthreads, 0, 50);
 
     if((sock_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
         printf("Error in socket()\n");
@@ -61,11 +69,17 @@ int main(){
         return -1;
     }
 
+    
     while(1) {
         if((client_fd = accept(sock_fd, (struct sockaddr *)&caddr, &caddr_len)) < 0){
             printf("Error in accept()\n");
             return -1;
         }
+        //num_threads++;
+        //printf("wait: client connection count=%d\n",num_threads);
+        sem_getvalue(&sem_nthreads, &num_threads);
+        printf("Num of threads=%u\n", 50-num_threads);
+        sem_wait(&sem_nthreads);
         pthread_t t;
         pthread_create(&t, NULL, handle_connection, &client_fd);
         //pthread_join(t, NULL);
